@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background: #000;
+    overflow: hidden;
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+}
+
+#um_video_player_wrapper {
+    width: 640px;
+    height: 360px;
+}

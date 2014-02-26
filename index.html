@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>um-video-player.js test</title>
+
+    <!-- Dependancies -->
+    <script src="./js/jquery-2.1.0.min.js"></script>
+    <script src="./js/video.js"></script>
+    <link rel="stylesheet" href="./css/video-js.css" />
+
+    <!-- Actual um-video-player.js -->
+    <script src="./js/um-video-player.js"></script>
+
+    <!-- Custom Style Sheets -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Basic Usage of um-video-player.js-->
+    <script>
+
+        var renderObjects = {
+            rID: 1,
+            rtitle: 'Ultimate Media Remix',
+            rthumbnail: 'moon_thumb.png',
+            contentObjs: [{
+                cId: "UU-0MrczERAe4",
+                startTime: 2.0,
+                endTime: 5.0,
+            }, {
+                cId: "UU-2QqLqnxXJc",                
+                startTime: 2.0,
+                endTime: 10.0,
+            }, {
+                cId: "UU-0MrczERAe4",
+                startTime: 54.0,
+                endTime: 59.0,
+            }, {
+                cId: "UU-2QqLqnxXJc",
+                startTime: 10.0,
+                endTime: 15.0,
+            }, {
+                cId: "UU-0MrczERAe4",
+                startTime: 34.0,
+                endTime: 37.0,
+            }],
+            pub_date: [2013,07,30],
+        };
+
+        $(document).ready(function(){
+
+            var player;
+
+            function onReady() {
+                console.log("READY");
+                player.play();
+            }
+
+            function onLoadError(e) {
+                console.log("ERROR", e);
+            }
+
+            function onTimeUpdate() {
+                console.log("ON TIME UPDATE",　"Current Time is:", this.currentTime());
+            }
+
+            function onFinish() {
+                console.log("ON FINISH");
+            }
+
+            player = new UMVideoPlayer("#um_video_player_wrapper", onReady, onLoadError, onTimeUpdate, onFinish);
+            player.setRenderObject(renderObjects);
+
+        });
+    
+    </script>
+
+</head>
+<body>
+
+    <!-- Placeholder for video player -->
+    <div id="um_video_player_wrapper"></div>
+
+</body>
+</html>
