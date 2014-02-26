@@ -1,5 +1,5 @@
 var DEFAULT_VIDEL_URL_API = "http://um-query.media.mit.edu/getvideourl";
-var DEFAULT_VIDEO_QUALITY = "low"
+var DEFAULT_VIDEO_QUALITY = "high"
 var TRANSITION_TIME = 500;
 
 function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, onVideoFinish) {
