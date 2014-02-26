@@ -42,7 +42,6 @@ var renderObjects = {
     
     ],
 };
-
 ```
 
 Prepare the placeholder `<div>` somewhere in your HTML document and be sure to define its height and width in css. (`id` could be arbitrary)
@@ -85,7 +84,7 @@ function onFinish() {
 
 ## API Reference
 
-### UMVideoPlayer("#id_of_placeholder", onReady, onLoadError, onTimeUpdate, onFinish);
+#### UMVideoPlayer("#id_of_placeholder", onReady, onLoadError, onTimeUpdate, onFinish);
 
 - `#id_of_placeholder"` is the `id` of the placeholder `<div>` element.
 - `onReady` is the callback function for when the video is ready for play.
@@ -93,21 +92,21 @@ function onFinish() {
 - `onTimeUpdate` is the callback function for when the video progresses.
 - `onFinish` is the callback function for when the video is done.
 
-### UMVideoPlayer.setRenderObject(obj)
+#### UMVideoPlayer.setRenderObject(obj)
 
-Give the instance and render object `obj`.
+- Give the instance and render object `obj`.
 
-### UMVideoPlayer.play()
+#### UMVideoPlayer.play()
 
-Play render object. Always call after `onReady` is invoked.
+- Play render object. Always call after `onReady` is invoked.
 
-### UMVideoPlayer.pause()
+#### UMVideoPlayer.pause()
 
-Pause render object
+- Pause render object
 
-### UMVideoPlayer.currentTime()
+#### UMVideoPlayer.currentTime()
 
-Get the current time of the render object.
+- Get the current time of the render object.
 
 ## Dependancies
 
