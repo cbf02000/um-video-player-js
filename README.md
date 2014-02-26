@@ -92,19 +92,19 @@ function onFinish() {
 - `onTimeUpdate` is the callback function for when the video progresses.
 - `onFinish` is the callback function for when the video is done.
 
-#### UMVideoPlayer.setRenderObject(obj)
+#### UMVideoPlayer.setRenderObject(obj);
 
 - Give the instance and render object `obj`.
 
-#### UMVideoPlayer.play()
+#### UMVideoPlayer.play();
 
 - Play render object. Always call after `onReady` is invoked.
 
-#### UMVideoPlayer.pause()
+#### UMVideoPlayer.pause();
 
 - Pause render object
 
-#### UMVideoPlayer.currentTime()
+#### UMVideoPlayer.currentTime();
 
 - Get the current time of the render object.
 
