@@ -84,9 +84,9 @@ function onFinish() {
 
 ## API Reference
 
-#### UMVideoPlayer("#id_of_placeholder", onReady, onLoadError, onTimeUpdate, onFinish);
+#### UMVideoPlayer("#id", onReady, onLoadError, onTimeUpdate, onFinish);
 
-- `#id_of_placeholder"` is the `id` of the placeholder `<div>` element.
+- `"#id"` is the `id` of the placeholder `<div>` element.
 - `onReady` is the callback function for when the video is ready for play.
 - `onLoadError` is the callback function for when their is an error.
 - `onTimeUpdate` is the callback function for when the video progresses.
