@@ -10,16 +10,16 @@ This javascript library preloads videos, coordinates the multiple `<video>` elem
 
 ## Usage
 
-Have these Javascript and CSS files included in your `<head>` section.
+Have these Javascript and CSS files included in your `<head>` section. For now, I recommend using the Github CDN to get the files, since there might be frequent changes and bugfixes to the codebase.
 
 ```html
 <!-- Dependancies -->
-<script src="./js/jquery-2.1.0.min.js"></script>
-<script src="./js/video.js"></script>
-<link rel="stylesheet" href="./css/video-js.css" />
+<script src="https://rawgithub.com/cbf02000/um-video-player-js/master/js/jquery-2.1.0.min.js"></script>
+<script src="https://rawgithub.com/cbf02000/um-video-player-js/master/js/video.js"></script>
+<link rel="stylesheet" href="https://rawgithub.com/cbf02000/um-video-player-js/master/css/video-js.css" />
 
 <!-- Actual um-video-player.js -->
-<script src="./js/um-video-player.js"></script>
+<script src="https://rawgithub.com/cbf02000/um-video-player-js/master/js/um-video-player.js"></script>
 ```
 
 Prepare the render object data structure. (For now, it is suppose to use the UM backend, all IDs are UMIDs, and automatically uses UMQuery to back reference the actual URL of video.)
@@ -108,7 +108,7 @@ function onFinish() {
 
 - Get the current time of the render object.
 
-## Dependancies
+## Dependencies
 
 This relies on the following libraries to function properly.
 
