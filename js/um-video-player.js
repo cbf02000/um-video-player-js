@@ -76,54 +76,10 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
             return false;
         }
 
-        var videoList = []
-
-        for (var item in this.renderObj.contentObjs) {
-            if (videoList.indexOf(this.renderObj.contentObjs[item].cId) < 0) {
-                videoList.push(this.renderObj.contentObjs[item].cId);
-            }
-        }
-
-        //console.log(videoList);
-
-        if (videoList.length == 0) {
-            return false;
-        }
-
-        $.post( DEFAULT_VIDEL_URL_API, { 
-            id_list: JSON.stringify({list: videoList})
-        }).done(function( json ) {
-            self.processAjaxResponse(json);
-        }).fail(function( jqxhr, textStatus, error ) {
-            var err = textStatus + ", " + error;
-            self.onLoadError("URL Query AJAX Failed");
-        });
+        this.loadInitialVideo();
 
         return true;
 
-    }
-
-    this.processAjaxResponse = function(res) {
-
-        //console.log("processAjaxResponse");
-
-        if (res.code == 0) {        
-
-            for (var item in this.renderObj.contentObjs) {
-                if (res.results.hasOwnProperty(this.renderObj.contentObjs[item].cId)) {
-                    this.renderObj.contentObjs[item].url = res.results[this.renderObj.contentObjs[item].cId].mp4[DEFAULT_VIDEO_QUALITY];
-                } else {
-                    this.onLoadError("Not all content URLs exist");
-                    return;
-                }
-            }
-
-            this.loadInitialVideo();
-
-        } else {
-            this.onLoadError("Bad response from AJAX...");
-            return;
-        }
     }
 
     this.generateId = function(num) {
@@ -142,11 +98,11 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
         //console.log("loadInitialVideo");
 
         this.currentVideo = 0;
-        this.videoObjects = new Array(this.renderObj.contentObjs.length);
+        this.videoObjects = new Array(this.renderObj.contentURLs.length);
         this.isVideoReady = false;
         this.videoUuid = self.generateId(10);
         this.renderObjectTime = 0;
-        this.contentTime = new Array(this.renderObj.contentObjs.length);
+        this.contentTime = new Array(this.renderObj.contentURLs.length);
         this.placeholderWidth = $(this.placeholderDiv).width();
         this.placeholderHeight = $(this.placeholderDiv).height();
 
@@ -158,19 +114,19 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
         $(self.placeholderDiv).empty();
         $(self.placeholderDiv).css("position", "absolute");
         
-        var content = this.renderObj.contentObjs[id];
+        var content = this.renderObj.contentURLs[id];
         this.appendVideo(id, content.url, content.startTime, content.endTime);
 
-        if (this.renderObj.contentObjs.length > id + 1) {
+        if (this.renderObj.contentURLs.length > id + 1) {
             content = null;
-            content = this.renderObj.contentObjs[id + 1];
+            content = this.renderObj.contentURLs[id + 1];
             this.appendVideo(id + 1, content.url, content.startTime, content.endTime);
         }
     }
 
     this.appendVideo = function (id) {
 
-        var content = this.renderObj.contentObjs[id];
+        var content = this.renderObj.contentURLs[id];
         var classTag = null;
 
         jQuery('<video />', {
@@ -225,8 +181,8 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
 
         //console.log("CONTENT TIME", self.contentTime[videoId], videoId);
 
-        this.currentTime(self.renderObj.contentObjs[videoId].startTime);
-        self.contentTime[videoId] = self.renderObj.contentObjs[videoId].startTime;
+        this.currentTime(self.renderObj.contentURLs[videoId].startTime);
+        self.contentTime[videoId] = self.renderObj.contentURLs[videoId].startTime;
 
     }
 
@@ -255,7 +211,7 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
     this.onPause = function() {
         //console.log("onPause");
 
-        if (self.currentVideo == self.renderObj.contentObjs.length && (self.renderObj.contentObjs[self.currentVideo - 1].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
+        if (self.currentVideo == self.renderObj.contentURLs.length && (self.renderObj.contentURLs[self.currentVideo - 1].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
             self.onVideoFinish();    
             self.loadInitialVideo();
             self.isVideoPlaying = false;
@@ -279,7 +235,7 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
             }
 
 
-            if ((self.renderObj.contentObjs[videoId].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
+            if ((self.renderObj.contentURLs[videoId].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
 
                 self.currentVideo++;
 
@@ -295,12 +251,12 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
 
                 });
 
-                if (self.renderObj.contentObjs.length > self.currentVideo) {
+                if (self.renderObj.contentURLs.length > self.currentVideo) {
                     $("#video-"+self.videoUuid+"-"+self.currentVideo).fadeIn(TRANSITION_TIME);
                     self.videoObjects[self.currentVideo].play();
 
-                    if (self.renderObj.contentObjs.length > self.currentVideo + 1) {
-                        var content = self.renderObj.contentObjs[self.currentVideo + 1];
+                    if (self.renderObj.contentURLs.length > self.currentVideo + 1) {
+                        var content = self.renderObj.contentURLs[self.currentVideo + 1];
                         self.appendVideo(self.currentVideo + 1, content.url, content.startTime, content.endTime);
                     }
 
