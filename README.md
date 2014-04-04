@@ -28,15 +28,15 @@ Prepare the render object data structure. (For now, it is suppose to use the UM 
 var renderObjects = {
     rID: 1,
     rtitle: 'Ultimate Media Remix',
-    contentObjs: [{
-        cId: "UU-0MrczERAe4",
+    contentURLs: [{
+        url: "http://url/to/video1.mp4"
         startTime: 2.0,
         endTime: 5.0,
     }, {
-        cId: "UU-2QqLqnxXJc",                
+        url: "http://url/to/video2.mp4",              
         startTime: 2.0,
         endTime: 10.0,
-    }, 
+    },
 
     /* Could contain as many content objects */
     
