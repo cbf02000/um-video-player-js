@@ -39,7 +39,7 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
 
     this.play = function () {
         if (this.isVideoReady) {
-            $("#video-"+self.videoUuid+"-"+self.currentVideo).fadeIn(TRANSITION_TIME);
+            $("#video-"+self.videoUuid+"-"+self.currentVideo).fadeIn(this.transitionTime);
             this.videoObjects[self.currentVideo].play();
             this.isVideoPlaying = true;
         } else {
@@ -212,7 +212,7 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
     this.onPause = function() {
         //console.log("onPause");
 
-        if (self.currentVideo == self.renderObj.contentURLs.length && (self.renderObj.contentURLs[self.currentVideo - 1].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
+        if (self.currentVideo == self.renderObj.contentURLs.length && (self.renderObj.contentURLs[self.currentVideo - 1].endTime*1000) - (this.currentTime()*1000) < this.transitionTime) {
             self.onVideoFinish();    
             self.loadInitialVideo();
             self.isVideoPlaying = false;
@@ -236,11 +236,11 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
             }
 
 
-            if ((self.renderObj.contentURLs[videoId].endTime*1000) - (this.currentTime()*1000) < TRANSITION_TIME) {
+            if ((self.renderObj.contentURLs[videoId].endTime*1000) - (this.currentTime()*1000) < this.transitionTime) {
 
                 self.currentVideo++;
 
-                $("#video-"+self.videoUuid+"-"+videoId).fadeOut(TRANSITION_TIME, function() {
+                $("#video-"+self.videoUuid+"-"+videoId).fadeOut(this.transitionTime, function() {
                     
                     if (self.currentVideo - 1 >= 0) {
                         //console.log("video being paused", self.currentVideo - 1);
