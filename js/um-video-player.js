@@ -1,8 +1,4 @@
-var DEFAULT_VIDEL_URL_API = "http://um-query.media.mit.edu/getvideourl";
-var DEFAULT_VIDEO_QUALITY = "high"
-var TRANSITION_TIME = 500;
-
-function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, onVideoFinish) {
+function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, onVideoFinish, transition) {
 
     var self = this;
 
@@ -23,6 +19,11 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
     this.renderObjectTime = 0;
     this.contentTime = [];
     this.isVideoPlaying = false;
+
+    this.transitionTime = 300;
+    if (transition != null && typeof transition == "number") {
+        this.transitionTime = transition;
+    }
 
     this.setRenderObject = function(obj) {
 
