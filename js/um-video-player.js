@@ -244,7 +244,9 @@ function UMVideoPlayer(divId, onReady, onLoadError, onRenderObjectTimeUpdate, on
                     
                     if (self.currentVideo - 1 >= 0) {
                         //console.log("video being paused", self.currentVideo - 1);
-                        self.videoObjects[self.currentVideo - 1].pause();
+                        if (self.videoObjects[self.currentVideo - 1] != null) {
+                            self.videoObjects[self.currentVideo - 1].pause();
+                        }
                         self.videoObjects[self.currentVideo - 1] = null;
                     }
 
